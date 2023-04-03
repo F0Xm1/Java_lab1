@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 public class Main  {
     public static void main(String[] args) {
         FridgeManager fridgeManager = new FridgeManager();
+        Freezer freezer = new Freezer();
+        freezer.method1();
+        freezer.method2();
 
         FridgeCamera fridgeCamera1 = new FridgeCamera(2, "electric", "mechanical", 10, 5);
         FridgeCamera fridgeCamera2 = new FridgeCamera(3, "electric", "mechanical", 15, 7);
@@ -18,7 +21,6 @@ public class Main  {
         fridgeManager.addFridge(fridgeCamera2);
         fridgeManager.addFridge(wineFridge1);
         fridgeManager.addFridge(wineFridge2);
-
         System.out.println("All fridges:");
         for (Fridge fridge : fridgeManager.fridges) {
             System.out.println(fridge.toString());
