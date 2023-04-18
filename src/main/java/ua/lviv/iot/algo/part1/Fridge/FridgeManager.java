@@ -23,5 +23,20 @@ public class FridgeManager extends Fridge {
     int getMaxUsableCapacity() {
         return 0;
     }
+
+    @Override
+    public String getHeaders() {
+        return null;
+    }
+
+    @Override
+    public String toCSV(String bottleVolume) {
+        return null;
+    }
+
+    @Override
+    public void writeToCSV(String filePath) {
+
+    }
 }
 

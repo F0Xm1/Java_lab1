@@ -24,4 +24,19 @@ public class FridgeCamera extends Fridge {
     int getMaxUsableCapacity() {
         return maxSausageWeight * VOLUME_PER_KILOGRAM;
     }
+
+    @Override
+    public String getHeaders() {
+        return "numberOfEntries,tapeDriveType,sausageMovementType,tapeSpeed,maxSausageWeight";
+    }
+
+    @Override
+    public String toCSV(String bottleVolume) {
+        return numberOfEntries + "," + tapeDriveType + "," + sausageMovementType + "," + tapeSpeed + "," + maxSausageWeight;
+    }
+
+    @Override
+    public void writeToCSV(String filePath) {
+
+    }
 }
