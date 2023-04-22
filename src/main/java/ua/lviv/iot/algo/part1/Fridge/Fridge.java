@@ -13,4 +13,7 @@ public abstract class Fridge {
     }
 
     public abstract void writeToCSV(String filePath);
+
+    public void setNumberOfBottles(int i) {
+    }
 }

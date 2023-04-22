@@ -29,4 +29,8 @@ public class WineFridge extends Fridge {
     int getMaxUsableCapacity() {
         return maxBottleCount * maxBottleVolume;
     }
+
+    public String toCSV() {
+        return null;
+    }
 }

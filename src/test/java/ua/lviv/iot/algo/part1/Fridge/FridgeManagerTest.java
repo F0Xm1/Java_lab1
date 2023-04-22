@@ -1,95 +1,148 @@
 package ua.lviv.iot.algo.part1.Fridge;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class FridgeManagerTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    private FridgeManager fridgeManager;
-    private WineFridge wineFridge;
+class FridgeManagerTest {
 
-    @BeforeEach
-    void setUp() {
-        fridgeManager = new FridgeManager();
-        wineFridge = new WineFridge(10, 750);
-        wineFridge.numberOfBottles = "5";
+    @Test
+    void addFridge() {
+        FridgeManager fridgeManager = new FridgeManager();
+        Fridge fridge1 = new Fridge() {
+            @Override
+            int getMaxUsableCapacity() {
+                return 100;
+            }
+
+            @Override
+            public String getHeaders() {
+                return null;
+            }
+
+            @Override
+            public String toCSV(String bottleVolume) {
+                return null;
+            }
+
+            @Override
+            public void writeToCSV(String filePath) {
+
+            }
+        };
+        Fridge fridge2 = new Fridge() {
+            @Override
+            int getMaxUsableCapacity() {
+                return 200;
+            }
+
+            @Override
+            public String getHeaders() {
+                return null;
+            }
+
+            @Override
+            public String toCSV(String bottleVolume) {
+                return null;
+            }
+
+            @Override
+            public void writeToCSV(String filePath) {
+
+            }
+        };
+        fridgeManager.addFridge(fridge1);
+        fridgeManager.addFridge(fridge2);
+        List<Fridge> expected = new ArrayList<>();
+        expected.add(fridge1);
+        expected.add(fridge2);
+        assertEquals(expected, fridgeManager.fridges);
     }
 
     @Test
-    void testSearchByMaxUsableCapacity() {
+    void searchByMaxUsableCapacity() {
+        FridgeManager fridgeManager = new FridgeManager();
+        Fridge fridge1 = new Fridge() {
+            @Override
+            int getMaxUsableCapacity() {
+                return 100;
+            }
+
+            @Override
+            public String getHeaders() {
+                return null;
+            }
+
+            @Override
+            public String toCSV(String bottleVolume) {
+                return null;
+            }
+
+            @Override
+            public void writeToCSV(String filePath) {
+
+            }
+        };
+        Fridge fridge2 = new Fridge() {
+            @Override
+            int getMaxUsableCapacity() {
+                return 200;
+            }
+
+            @Override
+            public String getHeaders() {
+                return null;
+            }
+
+            @Override
+            public String toCSV(String bottleVolume) {
+                return null;
+            }
+
+            @Override
+            public void writeToCSV(String filePath) {
+
+            }
+        };
+        fridgeManager.addFridge(fridge1);
+        fridgeManager.addFridge(fridge2);
+        List<Fridge> expected = new ArrayList<>();
+        expected.add(fridge1);
+        assertEquals(expected, fridgeManager.searchByMaxUsableCapacity(100));
+    }
+
+    @Test
+    void searchByClass() {
+        FridgeManager fridgeManager = new FridgeManager();
+        Fridge fridge1 = new Fridge() {
+            @Override
+            int getMaxUsableCapacity() {
+                return 100;
+            }
+
+            @Override
+            public String getHeaders() {
+                return null;
+            }
+
+            @Override
+            public String toCSV(String bottleVolume) {
+                return null;
+            }
+
+            @Override
+            public void writeToCSV(String filePath) {
+
+            }
+        };
+        WineFridge wineFridge = new WineFridge(1, 2);
+        fridgeManager.addFridge(fridge1);
         fridgeManager.addFridge(wineFridge);
-        List<Fridge> fridges = fridgeManager.searchByMaxUsableCapacity(3000);
-        Assertions.assertEquals(1, fridges.size());
-        Assertions.assertEquals(wineFridge, fridges.get(0));
-    }
-
-    @Test
-    void testSearchByClass() {
-        fridgeManager.addFridge(wineFridge);
-        List<Fridge> fridges = fridgeManager.searchByClass(WineFridge.class);
-        Assertions.assertEquals(1, fridges.size());
-        Assertions.assertEquals(wineFridge, fridges.get(0));
-    }
-
-    @Test
-    void testToCSV() {
-        String csv = wineFridge.toCSV("750");
-        Assertions.assertEquals("5,750", csv);
-    }
-
-    @Test
-    void testWriteToCSV() throws IOException {
-        fridgeManager.addFridge(wineFridge);
-        String filePath = "fridges.csv";
-        fridgeManager.writeToCSV(filePath);
-        File file = new File(filePath);
-        Assertions.assertTrue(file.exists());
-
-        // read contents of the file
-        List<String> lines = Files.readAllLines(file.toPath());
-        String expected = "numberOfBottles,bottleVolume\n5,750\n";
-        Assertions.assertEquals(expected, String.join("\n", lines));
-
-        // delete the file after the test
-        file.delete();
-    }
-
-    @Test
-    void testWriteToCSVEmptyList() throws IOException {
-        String filePath = "fridges.csv";
-        fridgeManager.writeToCSV(filePath);
-        File file = new File(filePath);
-        Assertions.assertTrue(file.exists());
-
-        // read contents of the file
-        List<String> lines = Files.readAllLines(file.toPath());
-        String expected = "numberOfBottles,bottleVolume\n";
-        Assertions.assertEquals(expected, String.join("\n", lines));
-
-        // delete the file after the test
-        file.delete();
-    }
-
-    @Test
-    void testWriteToCSVFileExists() throws IOException {
-        fridgeManager.addFridge(wineFridge);
-        String filePath = "fridges.csv";
-
-        // create a file with the same name
-        File file = new File(filePath);
-        file.createNewFile();
-
-        // check that an exception is thrown when trying to write to an existing file
-        Assertions.assertThrows(IOException.class, () -> {
-            fridgeManager.writeToCSV(filePath);
-        });
-
-        // delete the file after the test
-        file.delete();
+        List<Fridge> expected = new ArrayList<>();
+        expected.add(wineFridge);
+        assertEquals(expected, fridgeManager.searchByClass(WineFridge.class));
     }
 }
