@@ -13,11 +13,11 @@ public class WineFridge extends Fridge {
         this.maxBottleVolume = maxBottleVolume;
     }
     public String getHeaders() {
-        return "numberOfBottles,bottleVolume";
+        return "numberOfBottles,maxBottleVolume,maxBottleCount";
     }
 
-    public String toCSV(String bottleVolume) {
-        return numberOfBottles + "," + bottleVolume;
+    public String toCSV() {
+        return numberOfBottles + "," + maxBottleVolume + "," + maxBottleCount;
     }
 
     @Override
@@ -28,9 +28,5 @@ public class WineFridge extends Fridge {
     @Override
     int getMaxUsableCapacity() {
         return maxBottleCount * maxBottleVolume;
-    }
-
-    public String toCSV() {
-        return null;
     }
 }

@@ -35,7 +35,7 @@ public class Main  {
         }
 
         FridgeWriter fridgeWriter = new FridgeWriter();
-        fridgeWriter.writeToFile(fridgeManager.getFridges(), "fridges.csv", numberOfBottles, bottleVolume);
+        fridgeWriter.writeToFile(fridgeManager.fridges, "fridges.csv");
     }
 }
 

@@ -14,15 +14,14 @@ public class WineFridgeTest {
     @Test
     public void testGetHeaders() {
         WineFridge fridge = new WineFridge(10, 750);
-        Assertions.assertEquals("numberOfBottles,bottleVolume", fridge.getHeaders());
+        Assertions.assertEquals("numberOfBottles,maxBottleVolume,maxBottleCount", fridge.getHeaders());
     }
 
     @Test
     public void testToCSV() {
         WineFridge fridge = new WineFridge(10, 750);
-        fridge.numberOfBottles = "5";
-        String expected = "5,750";
-        Assertions.assertEquals(expected, fridge.toCSV("750"));
+        String expected = "null,750,10";
+        Assertions.assertEquals(expected, fridge.toCSV());
     }
 }
 

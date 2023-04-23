@@ -25,7 +25,7 @@ class Freezer extends Fridge {
     }
 
     @Override
-    public String toCSV(String bottleVolume) {
+    public String toCSV() {
         return null;
     }
 

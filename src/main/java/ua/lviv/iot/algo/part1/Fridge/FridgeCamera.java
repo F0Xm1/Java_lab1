@@ -31,7 +31,7 @@ public class FridgeCamera extends Fridge {
     }
 
     @Override
-    public String toCSV(String bottleVolume) {
+    public String toCSV() {
         return numberOfEntries + "," + tapeDriveType + "," + sausageMovementType + "," + tapeSpeed + "," + maxSausageWeight;
     }
 
