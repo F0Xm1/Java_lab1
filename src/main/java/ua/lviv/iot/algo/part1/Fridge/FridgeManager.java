@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FridgeManager extends Fridge {
+public class FridgeManager {
     List<Fridge> fridges = new ArrayList<>();
 
     public void addFridge(Fridge fridge) {
@@ -17,11 +17,6 @@ public class FridgeManager extends Fridge {
 
     public List<Fridge> searchByClass(Class<? extends Fridge> fridgeClass) {
         return fridges.stream().filter(f -> f.getClass().equals(fridgeClass)).collect(Collectors.toList());
-    }
-
-    @Override
-    int getMaxUsableCapacity() {
-        return 0;
     }
 }
 
